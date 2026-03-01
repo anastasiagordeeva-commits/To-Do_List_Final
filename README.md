@@ -1,24 +1,41 @@
-# Консольное приложение To-Do List (Java)
-Консольное приложение для управления списком задач, разработанное
-на языке Java.
+# To-Do List REST API (Spring Boot)
+REST API для управления списком задач (To-Do List), реализованный на Spring Boot.
+Реализован полноценный CRUD функционал без использования базы данных.
 
 ## Функциональность
-- Добавление задачи
-- Просмотр списка задач
-- Редактирование задачи
+- Создание задачи
+- Получение всех задач
+- Получение задачи по ID
+- Обновление задачи
 - Удаление задачи
 
 ## Используемые технологии
 - Java
-- Scanner
-- ArrayList
-- Enum
-- LocalDate
+- Spring Boot
+- Spring Web
+- REST API
+- ConcurrentHashMap
+- AtomicLong
 
-## Структура проекта
-- Task.java — модель задачи
-- TaskStatus.java — перечисление статусов
-- ListOfTasks.java — точка входа и консольный интерфейс
+## Архитектура
+Проект разделён на слои:
+- Controller: обработка HTTP-запросов
+- Service: бизнес-логика
+- Model: модель данных (Task, TaskStatus)
 
-## Запуск
-Запустить класс `ListOfTasks` в IntelliJ IDEA.
+
+## Модель задачи
+Task содержит:
+- id (Long)
+- title (String)
+- description (String)
+- status (enum: IN_PROGRESS, DONE, PAUSED)
+- creationDate (LocalDate)
+- deadline (LocalDate)
+
+## API Endpoints
+Получить все задачи - GET /tasks
+Получить задачу по ID - GET /tasks/{id}
+Создать задачу - POST /tasks
+Обновить задачу - PUT /tasks/{id}
+Удалить задачу - DELETE /tasks/{id}
