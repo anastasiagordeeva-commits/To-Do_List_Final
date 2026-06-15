@@ -24,22 +24,20 @@
 
 ## Архитектура
 Проект построен по трёхуровневой схеме:
-
-(Controller) TaskController - принимает HTTP-запросы, валидирует входные DTO
-(Service) TaskService - бизнес-логика, маппинг DTO-Entity
-(Repository) TaskRepository - интерфейс JPA для работы с БД
-(Model) Task, TaskStatus - JPA‑сущность и перечисление статусов
-(DTO) TaskRequest, TaskResponse - объекты передачи данных
-(Exception) GlobalExceptionHandler - глобальный обработчик ошибок
+- (Controller) TaskController - принимает HTTP-запросы, валидирует входные DTO
+- (Service) TaskService - бизнес-логика, маппинг DTO-Entity
+- (Repository) TaskRepository - интерфейс JPA для работы с БД
+- (Model) Task, TaskStatus - JPA‑сущность и перечисление статусов
+- (DTO) TaskRequest, TaskResponse - объекты передачи данных
+- (Exception) GlobalExceptionHandler - глобальный обработчик ошибок
 
 ## Модель задачи (Task)
-
-id (Long) - уникальный идентификатор, автоинкремент
-title (String) - название задачи, не пустое, ≤ 100 символов
-description (String) - описание, ≤ 500 символов (опционально)
-status (TaskStatus) - статус выполнения: IN_PROGRESS, DONE, PAUSED
-creationDate (LocalDate) - дата создания, автоматически (текущая дата)
-deadline (LocalDate) - срок выполнения, не может быть раньше creationDate
+- id (Long) - уникальный идентификатор, автоинкремент
+- title (String) - название задачи, не пустое, ≤ 100 символов
+- description (String) - описание, ≤ 500 символов (опционально)
+- status (TaskStatus) - статус выполнения: IN_PROGRESS, DONE, PAUSED
+- creationDate (LocalDate) - дата создания, автоматически (текущая дата)
+- deadline (LocalDate) - срок выполнения, не может быть раньше creationDate
 
 
 ### Предварительные требования
