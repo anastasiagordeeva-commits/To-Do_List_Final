@@ -1,41 +1,53 @@
-# To-Do List REST API (Spring Boot)
-REST API для управления списком задач (To-Do List), реализованный на Spring Boot.
-Реализован полноценный CRUD функционал без использования базы данных.
+# TO-DO List REST Service
+Сервис для управления задачами (To-Do list) на Java + Spring Boot.
 
 ## Функциональность
-- Создание задачи
-- Получение всех задач
-- Получение задачи по ID
-- Обновление задачи
-- Удаление задачи
+- Создание задачи (POST /tasks)
+- Просмотр всех задач (GET /tasks)
+- Просмотр задачи по ID (GET /tasks/{id})
+- Обновление задачи (PUT /tasks/{id})
+- Удаление задачи (DELETE /tasks/{id})
+- Валидация входных данных
+- Глобальная обработка ошибок
+- Интеграционные тесты
 
 ## Используемые технологии
-- Java
-- Spring Boot
+- Java 21
+- Spring Boot 3.4.5
+- Spring Data JPA (Hibernate)
+- PostgreSQL
+- Maven
+- Lombok
+- JUnit 5 + MockMvc
 - Spring Web
 - REST API
-- ConcurrentHashMap
-- AtomicLong
 
 ## Архитектура
-Проект разделён на слои:
-- Controller: обработка HTTP-запросов
-- Service: бизнес-логика
-- Model: модель данных (Task, TaskStatus)
+Проект построен по трёхуровневой схеме:
+
+(Controller) TaskController - принимает HTTP-запросы, валидирует входные DTO
+(Service) TaskService - бизнес-логика, маппинг DTO-Entity
+(Repository) TaskRepository - интерфейс JPA для работы с БД
+(Model) Task, TaskStatus - JPA‑сущность и перечисление статусов
+(DTO) TaskRequest, TaskResponse - объекты передачи данных
+(Exception) GlobalExceptionHandler - глобальный обработчик ошибок
+
+## Модель задачи (Task)
+
+id (Long) - уникальный идентификатор, автоинкремент
+title (String) - название задачи, не пустое, ≤ 100 символов
+description (String) - описание, ≤ 500 символов (опционально)
+status (TaskStatus) - статус выполнения: IN_PROGRESS, DONE, PAUSED
+creationDate (LocalDate) - дата создания, автоматически (текущая дата)
+deadline (LocalDate) - срок выполнения, не может быть раньше creationDate
 
 
-## Модель задачи
-Task содержит:
-- id (Long)
-- title (String)
-- description (String)
-- status (enum: IN_PROGRESS, DONE, PAUSED)
-- creationDate (LocalDate)
-- deadline (LocalDate)
+### Предварительные требования
+- JDK 21+
+- Maven 3.8+
+- (Опционально) PostgreSQL 15+
 
-## API Endpoints
-Получить все задачи - GET /tasks
-Получить задачу по ID - GET /tasks/{id}
-Создать задачу - POST /tasks
-Обновить задачу - PUT /tasks/{id}
-Удалить задачу - DELETE /tasks/{id}
+### Запуск
+git clone https://github.com/anastasiagordeeva-commits/To-Do_List_Final
+cd todo-list
+./mvnw spring-boot:run
